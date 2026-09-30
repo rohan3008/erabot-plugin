@@ -1,0 +1,12 @@
+{
+  "name": "erabot-marketplace",
+  "owner": { "name": "erabot", "url": "https://erabot.ai" },
+  "description": "erabot — find what your code is overpaying for LLM APIs.",
+  "plugins": [
+    {
+      "name": "erabot",
+      "source": "./",
+      "description": "Scan your repo for wasted LLM/AI API spend, with honest dollar estimates and fixes."
+    }
+  ]
+}
