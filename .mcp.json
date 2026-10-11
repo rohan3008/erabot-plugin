@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "erabot": {
+      "type": "http",
+      "url": "https://erabot-mcp.fly.dev/mcp"
+    }
+  }
+}

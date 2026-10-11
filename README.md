@@ -19,7 +19,16 @@ Then run **`/erabot:scan`** in any repository. It also triggers automatically wh
 - The cause and the fix for each — caching, cheaper-model candidates, caps, trimming
 - **Honest by design:** assumptions are marked, and a model swap is a *candidate* until it's shadow-tested — never claimed as "proven" from static code alone
 
-Want the *verified* fixes — proof each swap holds quality on your real traffic, plus apply-ready diffs and cost-regression alerts on your repo? The scan shows you how.
+Want the *verified* fixes — proof each swap holds quality on your real traffic, plus apply-ready diffs and cost-regression alerts on your repo? That's `deep_audit`, below.
+
+## Also installed: the hosted erabot tools
+
+Installing the plugin also registers erabot's hosted MCP server — no extra setup, no `claude mcp add`. These tools show up in Claude Code right away:
+
+- **`scan_code`** / **`scan_public_repo`** — *free*: estimate a pasted snippet or a public GitHub repo's LLM spend, server-side.
+- **`deep_audit`** — the *verified* paid audit: proof each fix holds quality on your real traffic (shadow-tested) plus apply-ready diffs. Needs an erabot key — get one at [erabot.ai](https://erabot.ai).
+
+The `/erabot:scan` skill above runs **locally on your own agent** (free); these run on **erabot's server**. One install gives you both — diagnose free, then upgrade to the verified fixes in the same tool.
 
 ## Proof
 
