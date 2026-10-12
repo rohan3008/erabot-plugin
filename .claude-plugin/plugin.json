@@ -1,7 +1,7 @@
 {
   "name": "erabot",
   "displayName": "erabot",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Scan your repo for wasted LLM/AI API spend — wrong model for the task, uncached prompts, uncapped agent loops, oversized context — with honest dollar estimates and fixes.",
   "author": { "name": "erabot", "url": "https://erabot.ai" },
   "homepage": "https://erabot.ai",

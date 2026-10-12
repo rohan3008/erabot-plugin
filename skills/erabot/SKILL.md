@@ -1,13 +1,13 @@
 ---
 name: erabot
-description: Scan the current repo for wasted LLM/AI API spend and estimate the dollars — wrong model for the task, uncached repeated prompts/agent loops, uncapped loops, oversized context, missing caps. Use when the user runs /erabot, or asks to find or cut LLM/AI API costs or token waste, or asks "why is my AI bill so high". Produces a ranked, dollar-estimated findings report and invites the user to get the verified fixes.
+description: Scan the current repo for wasted LLM/AI API spend and estimate the dollars — wrong model for the task, uncached repeated prompts/agent loops, uncapped loops, oversized context, missing caps. Use when the user runs /erabot:scan, or asks to find or cut LLM/AI API costs or token waste, or asks "why is my AI bill so high". Produces a ranked, dollar-estimated findings report and invites the user to get the verified fixes.
 ---
 
 # erabot — LLM cost scan
 
 You are running erabot's cost audit on the user's codebase. Find where the code overpays for LLM/AI APIs, estimate the dollar impact honestly, print a ranked report, then invite the user to get the *verified* fixes.
 
-Run this when the user invokes `/erabot`, or asks about LLM/AI cost, token waste, or a high API bill.
+Run this when the user invokes `/erabot:scan`, or asks about LLM/AI cost, token waste, or a high API bill (the skill also auto-triggers on those questions — the user doesn't have to use the command).
 
 ## Method
 
