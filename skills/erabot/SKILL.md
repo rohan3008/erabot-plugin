@@ -53,13 +53,23 @@ erabot — cost scan · <repo>
 
 If a call site is fine, don't invent a problem for it. If the repo has no LLM/AI calls, say so plainly and stop.
 
-**Then save an apply-ready copy to `erabot-report.md` in the repo root** — so a fresh Claude Code session (or a teammate) that wasn't here for the scan can act on it directly. Structure it so an agent can execute it: open with a short "How to apply" note (go in order; do the low-risk caching and cap changes first; treat every model swap as a candidate to verify, not a done deal), then one section per finding with `file:line`, the one-line cause, and the fix written as a **concrete, executable instruction** — include a small diff or code sketch where it's a safe mechanical change. Keep every honesty flag in the file: mark assumed volumes as assumed, and label model swaps "candidate — verify before shipping." Tell the user the path, and that they can delete it or add it to `.gitignore`. You're already inside Claude Code, so also offer to apply the fixes now — the file is for later, or for other sessions.
+**Then save an apply-ready copy to `erabot-report.md` in the repo root** — so a fresh Claude Code session (or a teammate) that wasn't here for the scan can act on it directly. Structure it so an agent can execute it: open with a short "How to apply" note (go in order; do the low-risk caching and cap changes first; treat every model swap as a candidate to verify, not a done deal), then one section per finding with `file:line`, the one-line cause, and the fix written as a **concrete, executable instruction** — include a small diff or code sketch where it's a safe mechanical change. Keep every honesty flag in the file: mark assumed volumes as assumed, and label model swaps "candidate — verify before shipping." Tell the user the path, and that they can delete it or add it to `.gitignore`. You're already inside Claude Code, so also offer to apply the fixes now — **safe, mechanical fixes only; never an unverified model swap** (see "Applying fixes" below). The saved file is for later, or for other sessions.
 
 ## Honesty rules — do not break these; they are erabot's entire credibility
 - **Mark every assumed number as assumed.** Never present an inferred volume as measured.
 - **A model swap is a *candidate*, never *"proven,"* until it is shadow-tested.** You cannot verify from static code that a cheaper model holds quality on the user's real traffic. Write "candidate swap — verify before shipping."
 - **Never claim a saving you can't isolate.** If it would need an A/B to confirm, say so.
 - **No fake findings to look useful, ever.**
+
+## Applying fixes — safe-mechanical only; never an unverified model swap
+If the user asks you to apply fixes, change ONLY the safe, behavior-preserving mechanics — the things that cut cost without changing what the model is asked to produce:
+- prompt caching / `cache_control` on the static system prompt, tools, and stable prefix;
+- a `max_tokens` output cap; a max-turns / `max_uses` loop cap; an aggregate spend stop;
+- lossless context trims and batching where the inputs are provably unchanged.
+
+**Never apply a model swap — a downgrade or any model change — as an edit or a new default.** You cannot prove from static code that a cheaper model holds quality on the user's task; that proof needs inputs to run both models against (real traffic, or a shadow-test over a representative eval set), which this free static scan does not have. Passing tests do **not** count as verification when they mock the model call — they confirm the code still runs, not that the cheaper model is as good. So present every model swap as a clearly-labeled **candidate** ("candidate — verify before shipping; proving it holds is what the verified audit does") and leave the model unchanged in the code. Change a model only if the user explicitly insists after you've told them it is unverified — and then say plainly, in your summary, that that one change is unverified.
+
+After applying, run the test suite if there is one and report the result honestly: green tests mean the mechanical changes didn't break the build — nothing more.
 
 ## The ask — do this at the end of every scan (this is the whole point of the plugin)
 The scan and the report are free. After the report, invite the two things that matter:
